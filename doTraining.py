@@ -39,6 +39,8 @@ for i in range(0,int(sys.argv[2])):
     else:
         currentNeurons = currentNeurons/2
         model.add(layers.Dense(currentNeurons, activation='relu'))
+        if currentNeurons == 2:
+            break
 
 # Last layer
 model.add(layers.Dense(1, activation='linear'))
@@ -47,24 +49,24 @@ opt = optimizers.Adam(float(sys.argv[3]))
 model.compile(loss="mean_squared_error", optimizer=opt)
 
 
-history = model.fit(train[variablesTrain],train[genpT],validation_split=0.1, epochs=1000, batch_size=int(sys.argv[4]), verbose=0, callbacks=[callbacks.EarlyStopping(monitor='val_loss',patience=50,verbose=0)])
+history = model.fit(train[variablesTrain],train[genpT],validation_split=0.1, epochs=1000, batch_size=int(sys.argv[4]), verbose=1, callbacks=[callbacks.EarlyStopping(monitor='val_loss',patience=50,verbose=1)])
 
 
 # Save the model
 
 model.save('model_nFirstNeurons' + sys.argv[1] + '_nHiddenLayers_' + sys.argv[2] + '_LearningRate_' + sys.argv[3] + '_BatchSize_' + sys.argv[4] + '.h5')
 
-# Summarize history for loss
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.ylabel('MSE',fontsize=10)
-plt.xlabel('Epoch',fontsize=10)
-plt.legend(['train', 'validation'], loc='upper right',fontsize=11)
-plt.tick_params(axis='x', labelsize=10)
-plt.tick_params(axis='y', labelsize=7)
-plt.yscale('log')
+# # Summarize history for loss
+# plt.plot(history.history['loss'])
+# plt.plot(history.history['val_loss'])
+# plt.ylabel('MSE',fontsize=10)
+# plt.xlabel('Epoch',fontsize=10)
+# plt.legend(['train', 'validation'], loc='upper right',fontsize=11)
+# plt.tick_params(axis='x', labelsize=10)
+# plt.tick_params(axis='y', labelsize=7)
+# plt.yscale('log')
 
 
-plt.savefig('history/model_loss_nFirstNeurons' + sys.argv[1] + '_nHiddenLayers_' + sys.argv[2] + '_LearningRate_' + sys.argv[3] + '_BatchSize_' + sys.argv[4] + '.png')
+# plt.savefig('history/model_loss_nFirstNeurons' + sys.argv[1] + '_nHiddenLayers_' + sys.argv[2] + '_LearningRate_' + sys.argv[3] + '_BatchSize_' + sys.argv[4] + '.png')
 
 
