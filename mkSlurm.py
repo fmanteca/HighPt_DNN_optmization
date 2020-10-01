@@ -23,7 +23,7 @@ if __name__ == "__main__":
         
         neurons = random.choice([128,256,512,1024])
         layers = random.randint(5, 15)
-        lr = random.uniform(0, 0.001)
+        lr = random.uniform(0, 0.0005)
         batch = random.choice([256,512,1024,2048])
 
         template = templateSlurm
