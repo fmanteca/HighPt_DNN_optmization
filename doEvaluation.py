@@ -12,25 +12,24 @@ variablesTrain = ["Muon_InnerTrack_eta", "Muon_InnerTrack_phi", "Muon_InnerTrack
 
 model_loss = model.evaluate(test[variablesTrain], test['Muon_Genpt'])
 
-
-start = s.find('nFirstNeurons') + 3
+start = s.find('Neurons') + 7
 end = s.find('_nHiddenLayers', start)
 nneurons = s[start:end]
 
-start = s.find('nHiddenLayers_') + 3
+start = s.find('Layers_') + 7
 end = s.find('_LearningRate', start)
 nlayers = s[start:end]
 
-start = s.find('LearningRate_') + 3
+start = s.find('ngRate_') + 7
 end = s.find('_BatchSize', start)
 lr = s[start:end]
 
-start = s.find('BatchSize_') + 3
+start = s.find('chSize_') + 7
 end = s.find('.h5', start)
 batch = s[start:end]
 
 f = open("evaluation.txt", "a")
-f.write(nneurons + "\t" + nlayers + "\t" + lr "\t" + batch "\t" + str(model_loss))
+f.write(nneurons + "\t" + nlayers + "\t" + lr + "\t" + batch + "\t" + str(model_loss) + "\n")
 f.close
 
         

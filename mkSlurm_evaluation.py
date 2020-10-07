@@ -3,6 +3,7 @@ import ROOT as r
 from array import array
 import numpy as np
 import random
+import glob
 
 # python mkSlurm_evaluation.py /gpfs/users/mantecap/CMSSW_11_1_0/src /gpfs/users/mantecap/DNN_optimization
 
@@ -26,10 +27,10 @@ if __name__ == "__main__":
         template = template.replace('WORKINGPATH', workingpath) 
         template = template.replace('FILE', str(imodel))
 
-        f = open('send_doEval_' + str(imodel)  + ' .sh', 'w')
+        f = open('send_doEval_' + str(imodel) + '.sh', 'w')
         f.write(template)
         f.close()
-        os.chmod('send_doEval_' + str(imodel)  + ' .sh', 'w', 0755)     
+        os.chmod('send_doEval_' + str(imodel) + '.sh', 0755)     
     
 
 
